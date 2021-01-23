@@ -9,7 +9,7 @@ import (
 	"runtime"
 )
 
-var inter = flag.String("i", "", "Interface to execute the tests")
+var inter = flag.String("i", "noInt", "Interface to execute the tests")
 
 func verifyError(out []byte, err error) {
 
@@ -23,7 +23,6 @@ func verifyError(out []byte, err error) {
 }
 
 func execute() {
-	fmt.Println(*inter)
 	fmt.Println("[+] Bringing the interface down...")
 	output, erro := exec.Command("bash", "-c", "sudo ifconfig "+*inter+" down").Output()
 	verifyError(output, erro)
@@ -40,6 +39,13 @@ func execute() {
 }
 
 func init() {
+
+	flag.Parse()
+
+	if *inter == "noInt" {
+		fmt.Println("[-] Please assign a wifi interface using -i ")
+		os.Exit(3)
+	}
 
 	if os.Geteuid() != 0 {
 		fmt.Println("[-] Dude/dudette, you gotta run this as root. Try sudo...")
@@ -58,6 +64,7 @@ func init() {
 }
 
 func main() {
-	flag.Parse()
+
 	execute()
+
 }
