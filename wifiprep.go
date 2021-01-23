@@ -42,21 +42,21 @@ func init() {
 
 	flag.Parse()
 
-	if *inter == "noInt" {
-		fmt.Println("[-] Please assign a wifi interface using -i ")
-		os.Exit(3)
+	if runtime.GOOS != "linux" {
+		fmt.Println("[-] Dude/dudette, you gotta run this in a debian compatible Linux distro")
+		fmt.Println("")
+		os.Exit(1)
 	}
 
 	if os.Geteuid() != 0 {
 		fmt.Println("[-] Dude/dudette, you gotta run this as root. Try sudo...")
 		fmt.Println("")
-		os.Exit(1)
+		os.Exit(2)
 	}
 
-	if runtime.GOOS != "linux" {
-		fmt.Println("[-] Dude/dudette, you gotta run this in a debian compatible Linux distro")
-		fmt.Println("")
-		os.Exit(2)
+	if *inter == "noInt" {
+		fmt.Println("[-] Please assign a wifi interface using -i ")
+		os.Exit(3)
 	}
 
 	fmt.Println("[+] Starting...")
