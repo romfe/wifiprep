@@ -11,3 +11,5 @@ Hope you find this useful
 ## USAGE
 
 $ go run wifiprep.go -i (wifi card interface)
+
+### Requires macchanger to run.
