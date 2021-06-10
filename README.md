@@ -12,4 +12,5 @@ Hope you find this useful
 
 $ sudo go run wifiprep.go -i (wifi card interface)
 
-### Requires macchanger to run.
+### Requires macchanger and net-tools to run.
+
